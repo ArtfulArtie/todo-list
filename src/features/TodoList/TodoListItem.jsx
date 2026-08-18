@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import TextInputWithLabel from '../../shared/TextInputWithLabel';
 import { isValidTodoTitle } from '../../utils/todoValidation';
 
 function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
   const [isEditing, setIsEditing] = useState(false);
   const [workingTitle, setWorkingTitle] = useState(todo.title);
+  const inputRef = useRef();
 
   const handleCancel = () => {
     setWorkingTitle(todo.title);
@@ -19,6 +20,8 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
     if (!isEditing) return;
 
     event.preventDefault();
+
+    if (!isValidTodoTitle(workingTitle)) return;
 
     onUpdateTodo({
       ...todo,
@@ -36,6 +39,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
             <TextInputWithLabel
               elementId={`todoTitle${todo.id}`}
               labelText="Todo"
+              ref={inputRef}
               value={workingTitle}
               onChange={handleEdit}
             />
