@@ -24,7 +24,6 @@ function TodosPage() {
     sortBy,
     sortDirection,
     filterTerm,
-    dataVersion,
   } = state;
 
   const debouncedFilterTerm = useDebounce(filterTerm, 300);
@@ -37,9 +36,7 @@ function TodosPage() {
   };
 
   useEffect(() => {
-    if (!token) {
-      return;
-    }
+    if (!token) return;
 
     async function fetchTodos() {
       dispatch({
@@ -82,7 +79,7 @@ function TodosPage() {
         });
       } catch (error) {
         const isFilterError =
-          debouncedFilterTerm ||
+          Boolean(debouncedFilterTerm) ||
           sortBy !== 'createdAt' ||
           sortDirection !== 'asc';
 
@@ -92,7 +89,7 @@ function TodosPage() {
             message: isFilterError
               ? `Error filtering/sorting todos: ${error.message}`
               : `Error fetching todos: ${error.message}`,
-            isFilterError: Boolean(isFilterError),
+            isFilterError,
           },
         });
       }
@@ -154,9 +151,7 @@ function TodosPage() {
   async function completeTodo(id) {
     const originalTodo = todoList.find((todo) => todo.id === id);
 
-    if (!originalTodo) {
-      return;
-    }
+    if (!originalTodo) return;
 
     dispatch({
       type: TODO_ACTIONS.COMPLETE_TODO_START,
@@ -205,9 +200,7 @@ function TodosPage() {
       (todo) => todo.id === editedTodo.id
     );
 
-    if (!originalTodo) {
-      return;
-    }
+    if (!originalTodo) return;
 
     dispatch({
       type: TODO_ACTIONS.UPDATE_TODO_START,
@@ -307,21 +300,21 @@ function TodosPage() {
       <SortBy
         sortBy={sortBy}
         sortDirection={sortDirection}
-        onSortByChange={(e) =>
+        onSortByChange={(event) =>
           dispatch({
             type: TODO_ACTIONS.SET_SORT,
             payload: {
-              sortBy: e.target.value,
+              sortBy: event.target.value,
               sortDirection,
             },
           })
         }
-        onSortDirectionChange={(e) =>
+        onSortDirectionChange={(event) =>
           dispatch({
             type: TODO_ACTIONS.SET_SORT,
             payload: {
               sortBy,
-              sortDirection: e.target.value,
+              sortDirection: event.target.value,
             },
           })
         }
@@ -338,7 +331,6 @@ function TodosPage() {
         todoList={todoList}
         onCompleteTodo={completeTodo}
         onUpdateTodo={updateTodo}
-        dataVersion={dataVersion}
       />
     </div>
   );
