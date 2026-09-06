@@ -27,6 +27,7 @@ function TodosPage() {
     sortBy,
     sortDirection,
     filterTerm,
+    dataVersion,
   } = state;
 
   const debouncedFilterTerm = useDebounce(filterTerm, 300);
@@ -34,7 +35,9 @@ function TodosPage() {
   const handleFilterChange = (newTerm) => {
     dispatch({
       type: TODO_ACTIONS.SET_FILTER,
-      payload: newTerm,
+      payload: {
+        filterTerm: newTerm,
+      },
     });
   };
 
@@ -106,6 +109,7 @@ function TodosPage() {
     sortBy,
     sortDirection,
     debouncedFilterTerm,
+    dataVersion,
   ]);
 
   async function addTodo(todoTitle) {
