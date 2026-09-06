@@ -112,6 +112,15 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.COMPLETE_TODO_SUCCESS:
       return {
         ...state,
+        todoList: state.todoList.map((todo) =>
+          todo.id === action.payload.id
+            ? {
+                ...todo,
+                ...(action.payload.savedTodo || {}),
+                isCompleted: true,
+              }
+            : todo
+        ),
         dataVersion: state.dataVersion + 1,
         error: '',
         filterError: '',
@@ -144,6 +153,14 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.UPDATE_TODO_SUCCESS:
       return {
         ...state,
+        todoList: state.todoList.map((todo) =>
+          todo.id === action.payload.id
+            ? {
+                ...todo,
+                ...(action.payload.savedTodo || {}),
+              }
+            : todo
+        ),
         dataVersion: state.dataVersion + 1,
         error: '',
         filterError: '',
@@ -206,4 +223,3 @@ export function todoReducer(state, action) {
       throw new Error(`Unknown action type: ${action.type}`);
   }
 }
-

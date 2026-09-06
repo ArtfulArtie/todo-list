@@ -205,10 +205,21 @@ function TodosPage() {
         throw new Error('Failed to complete todo');
       }
 
+      let savedTodo = null;
+
+      if (
+        response.headers
+          .get('content-type')
+          ?.includes('application/json')
+      ) {
+        savedTodo = await response.json();
+      }
+
       dispatch({
         type: TODO_ACTIONS.COMPLETE_TODO_SUCCESS,
         payload: {
           id,
+          savedTodo,
         },
       });
     } catch (error) {
@@ -265,10 +276,21 @@ function TodosPage() {
         throw new Error('Failed to update todo');
       }
 
+      let savedTodo = null;
+
+      if (
+        response.headers
+          .get('content-type')
+          ?.includes('application/json')
+      ) {
+        savedTodo = await response.json();
+      }
+
       dispatch({
         type: TODO_ACTIONS.UPDATE_TODO_SUCCESS,
         payload: {
           id: editedTodo.id,
+          savedTodo,
         },
       });
     } catch (error) {
