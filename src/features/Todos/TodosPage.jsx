@@ -14,7 +14,10 @@ import {
 function TodosPage() {
   const { token } = useAuth();
 
-  const [state, dispatch] = useReducer(todoReducer, initialTodoState);
+  const [state, dispatch] = useReducer(
+    todoReducer,
+    initialTodoState
+  );
 
   const {
     todoList,
@@ -36,7 +39,9 @@ function TodosPage() {
   };
 
   useEffect(() => {
-    if (!token) return;
+    if (!token) {
+      return;
+    }
 
     async function fetchTodos() {
       dispatch({
@@ -96,7 +101,12 @@ function TodosPage() {
     }
 
     fetchTodos();
-  }, [token, sortBy, sortDirection, debouncedFilterTerm]);
+  }, [
+    token,
+    sortBy,
+    sortDirection,
+    debouncedFilterTerm,
+  ]);
 
   async function addTodo(todoTitle) {
     const newTodo = {
@@ -149,9 +159,13 @@ function TodosPage() {
   }
 
   async function completeTodo(id) {
-    const originalTodo = todoList.find((todo) => todo.id === id);
+    const originalTodo = todoList.find(
+      (todo) => todo.id === id
+    );
 
-    if (!originalTodo) return;
+    if (!originalTodo) {
+      return;
+    }
 
     dispatch({
       type: TODO_ACTIONS.COMPLETE_TODO_START,
@@ -200,7 +214,9 @@ function TodosPage() {
       (todo) => todo.id === editedTodo.id
     );
 
-    if (!originalTodo) return;
+    if (!originalTodo) {
+      return;
+    }
 
     dispatch({
       type: TODO_ACTIONS.UPDATE_TODO_START,
@@ -211,18 +227,21 @@ function TodosPage() {
     });
 
     try {
-      const response = await fetch(`/api/tasks/${editedTodo.id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-TOKEN': token,
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-          title: editedTodo.title,
-          isCompleted: editedTodo.isCompleted,
-        }),
-      });
+      const response = await fetch(
+        `/api/tasks/${editedTodo.id}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': token,
+          },
+          credentials: 'include',
+          body: JSON.stringify({
+            title: editedTodo.title,
+            isCompleted: editedTodo.isCompleted,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error('Failed to update todo');
@@ -257,7 +276,9 @@ function TodosPage() {
             onClick={() =>
               dispatch({
                 type: TODO_ACTIONS.CLEAR_ERROR,
-                payload: 'error',
+                payload: {
+                  errorType: 'error',
+                },
               })
             }
           >
@@ -275,7 +296,9 @@ function TodosPage() {
             onClick={() =>
               dispatch({
                 type: TODO_ACTIONS.CLEAR_ERROR,
-                payload: 'filterError',
+                payload: {
+                  errorType: 'filterError',
+                },
               })
             }
           >
