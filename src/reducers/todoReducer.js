@@ -163,13 +163,15 @@ export function todoReducer(state, action) {
         sortBy: action.payload.sortBy,
         sortDirection: action.payload.sortDirection,
         filterError: '',
+        dataVersion: state.dataVersion + 1,
       };
 
     case TODO_ACTIONS.SET_FILTER:
       return {
         ...state,
-        filterTerm: action.payload,
+        filterTerm: action.payload.filterTerm,
         filterError: '',
+        dataVersion: state.dataVersion + 1,
       };
 
     case TODO_ACTIONS.CLEAR_ERROR:
