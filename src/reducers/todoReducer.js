@@ -188,8 +188,7 @@ export function todoReducer(state, action) {
         sortDirection: 'asc',
         filterError: '',
       };
-
-    default:
-      return state;
+default:
+  throw new Error(`Unknown action type: ${action.type}`);
   }
 }
