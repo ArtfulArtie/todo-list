@@ -30,9 +30,9 @@ export const initialTodoState = {
   todoList: [],
   error: '',
   filterError: '',
-  isTodoListLoading: false,
+  isTodoListLoading: true,
   sortBy: 'createdAt',
-  sortDirection: 'desc',
+  sortDirection: 'asc',
   filterTerm: '',
   dataVersion: 0,
 };
@@ -44,6 +44,7 @@ export function todoReducer(state, action) {
         ...state,
         isTodoListLoading: true,
         error: '',
+        filterError: '',
       };
 
     case TODO_ACTIONS.FETCH_SUCCESS:
@@ -55,132 +56,138 @@ export function todoReducer(state, action) {
         filterError: '',
       };
 
-  case TODO_ACTIONS.FETCH_ERROR:
-  return {
-    ...state,
-    isTodoListLoading: false,
-    error: action.payload.isFilterError
-      ? ''
-      : action.payload.message,
-    filterError: action.payload.isFilterError
-      ? action.payload.message
-      : '',
-  };
+    case TODO_ACTIONS.FETCH_ERROR:
+      return {
+        ...state,
+        isTodoListLoading: false,
+        error: action.payload.isFilterError
+          ? ''
+          : action.payload.message,
+        filterError: action.payload.isFilterError
+          ? action.payload.message
+          : '',
+      };
 
-  case TODO_ACTIONS.ADD_TODO_START:
-  return {
-    ...state,
-    todoList: [action.payload, ...state.todoList],
-    error: '',
-  };
+    case TODO_ACTIONS.ADD_TODO_START:
+      return {
+        ...state,
+        todoList: [action.payload, ...state.todoList],
+        error: '',
+      };
 
-  case TODO_ACTIONS.ADD_TODO_SUCCESS:
-  return {
-    ...state,
-    todoList: state.todoList.map((todo) =>
-      todo.id === action.payload.tempId
-        ? action.payload.savedTodo
-        : todo
-    ),
-    dataVersion: state.dataVersion + 1,
-    error: '',
-  };
+    case TODO_ACTIONS.ADD_TODO_SUCCESS:
+      return {
+        ...state,
+        todoList: state.todoList.map((todo) =>
+          todo.id === action.payload.tempId
+            ? action.payload.savedTodo
+            : todo
+        ),
+        dataVersion: state.dataVersion + 1,
+        error: '',
+      };
 
-  case TODO_ACTIONS.ADD_TODO_ERROR:
-  return {
-    ...state,
-    todoList: state.todoList.filter(
-      (todo) => todo.id !== action.payload.tempId
-    ),
-    error: action.payload.error,
-  };
+    case TODO_ACTIONS.ADD_TODO_ERROR:
+      return {
+        ...state,
+        todoList: state.todoList.filter(
+          (todo) => todo.id !== action.payload.tempId
+        ),
+        error: action.payload.error,
+      };
 
-  case TODO_ACTIONS.COMPLETE_TODO_START:
-  return {
-    ...state,
-    todoList: state.todoList.map((todo) =>
-      todo.id === action.payload.id
-        ? { ...todo, isCompleted: true }
-        : todo
-    ),
-    error: '',
-  };
+    case TODO_ACTIONS.COMPLETE_TODO_START:
+      return {
+        ...state,
+        todoList: state.todoList.map((todo) =>
+          todo.id === action.payload.id
+            ? { ...todo, isCompleted: true }
+            : todo
+        ),
+        error: '',
+      };
 
-  case TODO_ACTIONS.COMPLETE_TODO_SUCCESS:
-  return {
-    ...state,
-    dataVersion: state.dataVersion + 1,
-    error: '',
-  };
+    case TODO_ACTIONS.COMPLETE_TODO_SUCCESS:
+      return {
+        ...state,
+        dataVersion: state.dataVersion + 1,
+        error: '',
+      };
 
-  case TODO_ACTIONS.COMPLETE_TODO_ERROR:
-  return {
-    ...state,
-    todoList: state.todoList.map((todo) =>
-      todo.id === action.payload.id
-        ? action.payload.originalTodo
-        : todo
-    ),
-    error: action.payload.error,
-  };
+    case TODO_ACTIONS.COMPLETE_TODO_ERROR:
+      return {
+        ...state,
+        todoList: state.todoList.map((todo) =>
+          todo.id === action.payload.id
+            ? action.payload.originalTodo
+            : todo
+        ),
+        error: action.payload.error,
+      };
 
-  case TODO_ACTIONS.UPDATE_TODO_START:
-  return {
-    ...state,
-    todoList: state.todoList.map((todo) =>
-      todo.id === action.payload.id
-        ? action.payload.editedTodo
-        : todo
-    ),
-    error: '',
-  };
+    case TODO_ACTIONS.UPDATE_TODO_START:
+      return {
+        ...state,
+        todoList: state.todoList.map((todo) =>
+          todo.id === action.payload.id
+            ? action.payload.editedTodo
+            : todo
+        ),
+        error: '',
+      };
 
-  case TODO_ACTIONS.UPDATE_TODO_SUCCESS:
-  return {
-    ...state,
-    dataVersion: state.dataVersion + 1,
-    error: '',
-  };
+    case TODO_ACTIONS.UPDATE_TODO_SUCCESS:
+      return {
+        ...state,
+        dataVersion: state.dataVersion + 1,
+        error: '',
+      };
 
-  case TODO_ACTIONS.UPDATE_TODO_ERROR:
-  return {
-    ...state,
-    todoList: state.todoList.map((todo) =>
-      todo.id === action.payload.id
-        ? action.payload.originalTodo
-        : todo
-    ),
-    error: action.payload.error,
-  };
+    case TODO_ACTIONS.UPDATE_TODO_ERROR:
+      return {
+        ...state,
+        todoList: state.todoList.map((todo) =>
+          todo.id === action.payload.id
+            ? action.payload.originalTodo
+            : todo
+        ),
+        error: action.payload.error,
+      };
 
-  case TODO_ACTIONS.SET_SORT:
-  return {
-    ...state,
-    sortBy: action.payload.sortBy,
-    sortDirection: action.payload.sortDirection,
-  };
+    case TODO_ACTIONS.SET_SORT:
+      return {
+        ...state,
+        sortBy: action.payload.sortBy,
+        sortDirection: action.payload.sortDirection,
+      };
 
-  case TODO_ACTIONS.SET_FILTER:
-  return {
-    ...state,
-    filterTerm: action.payload,
-  };
+    case TODO_ACTIONS.SET_FILTER:
+      return {
+        ...state,
+        filterTerm: action.payload,
+      };
 
-  case TODO_ACTIONS.CLEAR_ERROR:
-  return {
-    ...state,
-    error: '',
-    filterError: '',
-  };
+    case TODO_ACTIONS.CLEAR_ERROR:
+      return {
+        ...state,
+        error:
+          action.payload === 'error'
+            ? ''
+            : state.error,
+        filterError:
+          action.payload === 'filterError'
+            ? ''
+            : state.filterError,
+      };
 
-  case TODO_ACTIONS.RESET_FILTERS:
-  return {
-    ...state,
-    filterTerm: '',
-    sortBy: 'createdAt',
-    sortDirection: 'desc',
-    filterError: '',
-  };
+    case TODO_ACTIONS.RESET_FILTERS:
+      return {
+        ...state,
+        filterTerm: '',
+        sortBy: 'createdAt',
+        sortDirection: 'asc',
+        filterError: '',
+      };
 
     default:
       return state;
