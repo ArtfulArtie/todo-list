@@ -1,3 +1,5 @@
+
+
 ```js
 export const TODO_ACTIONS = {
   FETCH_START: 'FETCH_START',
@@ -64,6 +66,10 @@ export function todoReducer(state, action) {
           : '',
       };
 
+    // -------------------------
+    // ADD TODO
+    // -------------------------
+
     case TODO_ACTIONS.ADD_TODO_START:
       return {
         ...state,
@@ -80,6 +86,7 @@ export function todoReducer(state, action) {
             ? action.payload.savedTodo
             : todo
         ),
+        dataVersion: state.dataVersion + 1,
         error: '',
         filterError: '',
       };
@@ -93,6 +100,10 @@ export function todoReducer(state, action) {
         error: action.payload.error,
         filterError: '',
       };
+
+    // -------------------------
+    // COMPLETE TODO
+    // -------------------------
 
     case TODO_ACTIONS.COMPLETE_TODO_START:
       return {
@@ -112,6 +123,7 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.COMPLETE_TODO_SUCCESS:
       return {
         ...state,
+        dataVersion: state.dataVersion + 1,
         error: '',
         filterError: '',
       };
@@ -128,6 +140,10 @@ export function todoReducer(state, action) {
         filterError: '',
       };
 
+    // -------------------------
+    // UPDATE TODO
+    // -------------------------
+
     case TODO_ACTIONS.UPDATE_TODO_START:
       return {
         ...state,
@@ -143,6 +159,7 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.UPDATE_TODO_SUCCESS:
       return {
         ...state,
+        dataVersion: state.dataVersion + 1,
         error: '',
         filterError: '',
       };
@@ -159,6 +176,10 @@ export function todoReducer(state, action) {
         filterError: '',
       };
 
+    // -------------------------
+    // SORT / FILTER
+    // -------------------------
+
     case TODO_ACTIONS.SET_SORT:
       return {
         ...state,
@@ -174,6 +195,10 @@ export function todoReducer(state, action) {
         filterError: '',
       };
 
+    // -------------------------
+    // ERRORS
+    // -------------------------
+
     case TODO_ACTIONS.CLEAR_ERROR:
       if (action.payload.errorType === 'filterError') {
         return {
@@ -186,6 +211,10 @@ export function todoReducer(state, action) {
         ...state,
         error: '',
       };
+
+    // -------------------------
+    // RESET FILTERS
+    // -------------------------
 
     case TODO_ACTIONS.RESET_FILTERS:
       return {
@@ -201,4 +230,3 @@ export function todoReducer(state, action) {
   }
 }
 ```
-
