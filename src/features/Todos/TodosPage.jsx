@@ -1,4 +1,3 @@
-```jsx
 import { useEffect, useReducer } from 'react';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList/TodoList';
@@ -28,6 +27,7 @@ function TodosPage() {
     sortBy,
     sortDirection,
     filterTerm,
+    dataVersion,
   } = state;
 
   const debouncedFilterTerm = useDebounce(filterTerm, 300);
@@ -41,6 +41,8 @@ function TodosPage() {
     });
   };
 
+  // Fetch todos whenever authentication,
+  // sorting, filtering, or successful mutations change.
   useEffect(() => {
     if (!token) {
       return;
@@ -111,7 +113,12 @@ function TodosPage() {
     sortBy,
     sortDirection,
     debouncedFilterTerm,
+    dataVersion,
   ]);
+
+  // -------------------------
+  // ADD TODO
+  // -------------------------
 
   async function addTodo(todoTitle) {
     const newTodo = {
@@ -120,6 +127,8 @@ function TodosPage() {
       isCompleted: false,
     };
 
+    // Optimistic update:
+    // show the todo immediately.
     dispatch({
       type: TODO_ACTIONS.ADD_TODO_START,
       payload: newTodo,
@@ -145,6 +154,8 @@ function TodosPage() {
 
       const savedTodo = await response.json();
 
+      // Replace temporary optimistic todo
+      // with the server-created todo.
       dispatch({
         type: TODO_ACTIONS.ADD_TODO_SUCCESS,
         payload: {
@@ -153,6 +164,7 @@ function TodosPage() {
         },
       });
     } catch (error) {
+      // Remove the optimistic todo.
       dispatch({
         type: TODO_ACTIONS.ADD_TODO_ERROR,
         payload: {
@@ -163,6 +175,10 @@ function TodosPage() {
     }
   }
 
+  // -------------------------
+  // COMPLETE TODO
+  // -------------------------
+
   async function completeTodo(id) {
     const originalTodo = todoList.find(
       (todo) => todo.id === id
@@ -172,6 +188,7 @@ function TodosPage() {
       return;
     }
 
+    // Optimistic update.
     dispatch({
       type: TODO_ACTIONS.COMPLETE_TODO_START,
       payload: {
@@ -203,6 +220,8 @@ function TodosPage() {
         },
       });
     } catch (error) {
+      // Restore the exact todo from before
+      // the optimistic update.
       dispatch({
         type: TODO_ACTIONS.COMPLETE_TODO_ERROR,
         payload: {
@@ -214,6 +233,10 @@ function TodosPage() {
     }
   }
 
+  // -------------------------
+  // UPDATE TODO
+  // -------------------------
+
   async function updateTodo(editedTodo) {
     const originalTodo = todoList.find(
       (todo) => todo.id === editedTodo.id
@@ -223,6 +246,7 @@ function TodosPage() {
       return;
     }
 
+    // Optimistic update.
     dispatch({
       type: TODO_ACTIONS.UPDATE_TODO_START,
       payload: {
@@ -259,6 +283,8 @@ function TodosPage() {
         },
       });
     } catch (error) {
+      // Restore the exact todo from before
+      // the optimistic update.
       dispatch({
         type: TODO_ACTIONS.UPDATE_TODO_ERROR,
         payload: {
