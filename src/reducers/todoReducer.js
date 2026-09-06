@@ -1,4 +1,3 @@
-
 export const TODO_ACTIONS = {
   FETCH_START: 'FETCH_START',
   FETCH_SUCCESS: 'FETCH_SUCCESS',
@@ -165,8 +164,9 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.SET_SORT:
       return {
         ...state,
-        sortBy: action.payload.sortBy,
-        sortDirection: action.payload.sortDirection,
+        sortBy: action.payload.sortBy ?? state.sortBy,
+        sortDirection:
+          action.payload.sortDirection ?? state.sortDirection,
         error: '',
         filterError: '',
       };
