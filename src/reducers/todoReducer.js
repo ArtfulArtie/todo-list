@@ -1,3 +1,4 @@
+
 export const TODO_ACTIONS = {
   FETCH_START: 'FETCH_START',
   FETCH_SUCCESS: 'FETCH_SUCCESS',
@@ -63,10 +64,6 @@ export function todoReducer(state, action) {
           : '',
       };
 
-    // -------------------------
-    // ADD TODO
-    // -------------------------
-
     case TODO_ACTIONS.ADD_TODO_START:
       return {
         ...state,
@@ -97,10 +94,6 @@ export function todoReducer(state, action) {
         error: action.payload.error,
         filterError: '',
       };
-
-    // -------------------------
-    // COMPLETE TODO
-    // -------------------------
 
     case TODO_ACTIONS.COMPLETE_TODO_START:
       return {
@@ -137,10 +130,6 @@ export function todoReducer(state, action) {
         filterError: '',
       };
 
-    // -------------------------
-    // UPDATE TODO
-    // -------------------------
-
     case TODO_ACTIONS.UPDATE_TODO_START:
       return {
         ...state,
@@ -173,15 +162,12 @@ export function todoReducer(state, action) {
         filterError: '',
       };
 
-    // -------------------------
-    // SORT / FILTER
-    // -------------------------
-
     case TODO_ACTIONS.SET_SORT:
       return {
         ...state,
         sortBy: action.payload.sortBy,
         sortDirection: action.payload.sortDirection,
+        error: '',
         filterError: '',
       };
 
@@ -189,12 +175,9 @@ export function todoReducer(state, action) {
       return {
         ...state,
         filterTerm: action.payload.filterTerm,
+        error: '',
         filterError: '',
       };
-
-    // -------------------------
-    // ERRORS
-    // -------------------------
 
     case TODO_ACTIONS.CLEAR_ERROR:
       if (action.payload.errorType === 'filterError') {
@@ -209,16 +192,13 @@ export function todoReducer(state, action) {
         error: '',
       };
 
-    // -------------------------
-    // RESET FILTERS
-    // -------------------------
-
     case TODO_ACTIONS.RESET_FILTERS:
       return {
         ...state,
         filterTerm: '',
         sortBy: 'createdAt',
         sortDirection: 'asc',
+        error: '',
         filterError: '',
       };
 
@@ -226,4 +206,4 @@ export function todoReducer(state, action) {
       throw new Error(`Unknown action type: ${action.type}`);
   }
 }
-```
+

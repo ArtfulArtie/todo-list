@@ -41,8 +41,6 @@ function TodosPage() {
     });
   };
 
-  // Fetch todos whenever authentication,
-  // sorting, filtering, or successful mutations change.
   useEffect(() => {
     if (!token) {
       return;
@@ -127,8 +125,6 @@ function TodosPage() {
       isCompleted: false,
     };
 
-    // Optimistic update:
-    // show the todo immediately.
     dispatch({
       type: TODO_ACTIONS.ADD_TODO_START,
       payload: newTodo,
@@ -154,8 +150,6 @@ function TodosPage() {
 
       const savedTodo = await response.json();
 
-      // Replace temporary optimistic todo
-      // with the server-created todo.
       dispatch({
         type: TODO_ACTIONS.ADD_TODO_SUCCESS,
         payload: {
@@ -164,7 +158,6 @@ function TodosPage() {
         },
       });
     } catch (error) {
-      // Remove the optimistic todo.
       dispatch({
         type: TODO_ACTIONS.ADD_TODO_ERROR,
         payload: {
@@ -188,7 +181,6 @@ function TodosPage() {
       return;
     }
 
-    // Optimistic update.
     dispatch({
       type: TODO_ACTIONS.COMPLETE_TODO_START,
       payload: {
@@ -220,8 +212,6 @@ function TodosPage() {
         },
       });
     } catch (error) {
-      // Restore the exact todo from before
-      // the optimistic update.
       dispatch({
         type: TODO_ACTIONS.COMPLETE_TODO_ERROR,
         payload: {
@@ -246,7 +236,6 @@ function TodosPage() {
       return;
     }
 
-    // Optimistic update.
     dispatch({
       type: TODO_ACTIONS.UPDATE_TODO_START,
       payload: {
@@ -283,8 +272,6 @@ function TodosPage() {
         },
       });
     } catch (error) {
-      // Restore the exact todo from before
-      // the optimistic update.
       dispatch({
         type: TODO_ACTIONS.UPDATE_TODO_ERROR,
         payload: {
@@ -391,4 +378,3 @@ function TodosPage() {
 }
 
 export default TodosPage;
-```
