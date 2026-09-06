@@ -43,6 +43,13 @@ function TodosPage() {
 
   useEffect(() => {
     if (!token) {
+      dispatch({
+        type: TODO_ACTIONS.FETCH_SUCCESS,
+        payload: {
+          todos: [],
+        },
+      });
+
       return;
     }
 
@@ -205,10 +212,19 @@ function TodosPage() {
         throw new Error('Failed to complete todo');
       }
 
+      let savedTodo = null;
+
+      const contentType = response.headers.get('content-type');
+
+      if (contentType?.includes('application/json')) {
+        savedTodo = await response.json();
+      }
+
       dispatch({
         type: TODO_ACTIONS.COMPLETE_TODO_SUCCESS,
         payload: {
           id,
+          savedTodo,
         },
       });
     } catch (error) {
@@ -265,10 +281,19 @@ function TodosPage() {
         throw new Error('Failed to update todo');
       }
 
+      let savedTodo = null;
+
+      const contentType = response.headers.get('content-type');
+
+      if (contentType?.includes('application/json')) {
+        savedTodo = await response.json();
+      }
+
       dispatch({
         type: TODO_ACTIONS.UPDATE_TODO_SUCCESS,
         payload: {
           id: editedTodo.id,
+          savedTodo,
         },
       });
     } catch (error) {
