@@ -4,13 +4,16 @@ import TodoList from './TodoList/TodoList';
 import SortBy from '../../shared/SortBy';
 import useDebounce from '../../utils/useDebounce';
 import FilterInput from '../../shared/FilterInput';
+import { useAuth } from '../../contexts/AuthContext';
 import {
   todoReducer,
   initialTodoState,
   TODO_ACTIONS,
 } from '../../reducers/todoReducer';
 
-function TodosPage({ token }) {
+function TodosPage() {
+  const { token } = useAuth();
+
   const [state, dispatch] = useReducer(todoReducer, initialTodoState);
 
   const {
@@ -81,7 +84,7 @@ function TodosPage({ token }) {
         const isFilterError =
           debouncedFilterTerm ||
           sortBy !== 'createdAt' ||
-          sortDirection !== 'desc';
+          sortDirection !== 'asc';
 
         dispatch({
           type: TODO_ACTIONS.FETCH_ERROR,
@@ -255,11 +258,13 @@ function TodosPage({ token }) {
       {error && (
         <div>
           <p>{error}</p>
+
           <button
             type="button"
             onClick={() =>
               dispatch({
                 type: TODO_ACTIONS.CLEAR_ERROR,
+                payload: 'error',
               })
             }
           >
@@ -277,6 +282,7 @@ function TodosPage({ token }) {
             onClick={() =>
               dispatch({
                 type: TODO_ACTIONS.CLEAR_ERROR,
+                payload: 'filterError',
               })
             }
           >
@@ -339,5 +345,3 @@ function TodosPage({ token }) {
 }
 
 export default TodosPage;
-```
-
