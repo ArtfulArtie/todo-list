@@ -1,14 +1,17 @@
-function Header({ token, onSetToken, onSetEmail }) {
-  const handleLogOut = () => {
-    onSetToken('');
-    onSetEmail('');
+import { useAuth } from '../contexts/AuthContext';
+
+function Header() {
+  const { isAuthenticated, logout } = useAuth();
+
+  const handleLogOut = async () => {
+    await logout();
   };
 
   return (
     <header>
       <h1>Todo List</h1>
 
-      {token && (
+      {isAuthenticated && (
         <button type="button" onClick={handleLogOut}>
           Log Out
         </button>
