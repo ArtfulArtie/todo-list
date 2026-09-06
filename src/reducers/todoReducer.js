@@ -197,7 +197,7 @@ export function todoReducer(state, action) {
       };
 
     case TODO_ACTIONS.CLEAR_ERROR:
-      if (action.payload.errorType === 'filterError') {
+      if (action.payload?.errorType === 'filterError') {
         return {
           ...state,
           filterError: '',

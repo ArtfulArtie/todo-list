@@ -121,10 +121,7 @@ function TodosPage() {
     dataVersion,
   ]);
 
-  // -------------------------
   // ADD TODO
-  // -------------------------
-
   async function addTodo(todoTitle) {
     const newTodo = {
       id: Date.now(),
@@ -175,10 +172,7 @@ function TodosPage() {
     }
   }
 
-  // -------------------------
   // COMPLETE TODO
-  // -------------------------
-
   async function completeTodo(id) {
     const originalTodo = todoList.find(
       (todo) => todo.id === id
@@ -227,7 +221,6 @@ function TodosPage() {
         payload: {
           id,
           savedTodo,
-          savedTodo,
         },
       });
     } catch (error) {
@@ -242,10 +235,7 @@ function TodosPage() {
     }
   }
 
-  // -------------------------
   // UPDATE TODO
-  // -------------------------
-
   async function updateTodo(editedTodo) {
     const originalTodo = todoList.find(
       (todo) => todo.id === editedTodo.id
@@ -298,7 +288,6 @@ function TodosPage() {
         type: TODO_ACTIONS.UPDATE_TODO_SUCCESS,
         payload: {
           id: editedTodo.id,
-          savedTodo,
           savedTodo,
         },
       });
@@ -372,21 +361,21 @@ function TodosPage() {
       <SortBy
         sortBy={sortBy}
         sortDirection={sortDirection}
-        onSortByChange={(event) =>
+        onSortByChange={(value) =>
           dispatch({
             type: TODO_ACTIONS.SET_SORT,
             payload: {
-              sortBy: event.target.value,
+              sortBy: value,
               sortDirection,
             },
           })
         }
-        onSortDirectionChange={(event) =>
+        onSortDirectionChange={(value) =>
           dispatch({
             type: TODO_ACTIONS.SET_SORT,
             payload: {
               sortBy,
-              sortDirection: event.target.value,
+              sortDirection: value,
             },
           })
         }

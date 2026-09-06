@@ -4,7 +4,11 @@ function Header() {
   const { isAuthenticated, logout } = useAuth();
 
   const handleLogOut = async () => {
-    await logout();
+    const result = await logout();
+
+    if (!result.success) {
+      console.error(result.error);
+    }
   };
 
   return (
