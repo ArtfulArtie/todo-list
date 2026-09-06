@@ -1,16 +1,21 @@
+```js
 export const TODO_ACTIONS = {
   FETCH_START: 'FETCH_START',
   FETCH_SUCCESS: 'FETCH_SUCCESS',
   FETCH_ERROR: 'FETCH_ERROR',
+
   ADD_TODO_START: 'ADD_TODO_START',
   ADD_TODO_SUCCESS: 'ADD_TODO_SUCCESS',
   ADD_TODO_ERROR: 'ADD_TODO_ERROR',
+
   COMPLETE_TODO_START: 'COMPLETE_TODO_START',
   COMPLETE_TODO_SUCCESS: 'COMPLETE_TODO_SUCCESS',
   COMPLETE_TODO_ERROR: 'COMPLETE_TODO_ERROR',
+
   UPDATE_TODO_START: 'UPDATE_TODO_START',
   UPDATE_TODO_SUCCESS: 'UPDATE_TODO_SUCCESS',
   UPDATE_TODO_ERROR: 'UPDATE_TODO_ERROR',
+
   SET_SORT: 'SET_SORT',
   SET_FILTER: 'SET_FILTER',
   CLEAR_ERROR: 'CLEAR_ERROR',
@@ -41,7 +46,7 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.FETCH_SUCCESS:
       return {
         ...state,
-        todoList: action.payload,
+        todoList: action.payload.todos,
         isTodoListLoading: false,
         error: '',
         filterError: '',
@@ -75,7 +80,6 @@ export function todoReducer(state, action) {
             ? action.payload.savedTodo
             : todo
         ),
-        dataVersion: state.dataVersion + 1,
         error: '',
         filterError: '',
       };
@@ -108,7 +112,6 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.COMPLETE_TODO_SUCCESS:
       return {
         ...state,
-        dataVersion: state.dataVersion + 1,
         error: '',
         filterError: '',
       };
@@ -140,7 +143,6 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.UPDATE_TODO_SUCCESS:
       return {
         ...state,
-        dataVersion: state.dataVersion + 1,
         error: '',
         filterError: '',
       };
@@ -163,7 +165,6 @@ export function todoReducer(state, action) {
         sortBy: action.payload.sortBy,
         sortDirection: action.payload.sortDirection,
         filterError: '',
-        dataVersion: state.dataVersion + 1,
       };
 
     case TODO_ACTIONS.SET_FILTER:
@@ -171,7 +172,6 @@ export function todoReducer(state, action) {
         ...state,
         filterTerm: action.payload.filterTerm,
         filterError: '',
-        dataVersion: state.dataVersion + 1,
       };
 
     case TODO_ACTIONS.CLEAR_ERROR:
@@ -194,10 +194,11 @@ export function todoReducer(state, action) {
         sortBy: 'createdAt',
         sortDirection: 'asc',
         filterError: '',
-        dataVersion: state.dataVersion + 1,
       };
 
     default:
       throw new Error(`Unknown action type: ${action.type}`);
   }
 }
+```
+
