@@ -43,6 +43,13 @@ function TodosPage() {
 
   useEffect(() => {
     if (!token) {
+      dispatch({
+        type: TODO_ACTIONS.FETCH_SUCCESS,
+        payload: {
+          todos: [],
+        },
+      });
+
       return;
     }
 
@@ -220,6 +227,7 @@ function TodosPage() {
         payload: {
           id,
           savedTodo,
+          savedTodo,
         },
       });
     } catch (error) {
@@ -290,6 +298,7 @@ function TodosPage() {
         type: TODO_ACTIONS.UPDATE_TODO_SUCCESS,
         payload: {
           id: editedTodo.id,
+          savedTodo,
           savedTodo,
         },
       });
