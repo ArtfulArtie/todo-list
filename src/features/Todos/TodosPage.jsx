@@ -1,3 +1,4 @@
+```jsx
 import { useEffect, useReducer } from 'react';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList/TodoList';
@@ -27,7 +28,6 @@ function TodosPage() {
     sortBy,
     sortDirection,
     filterTerm,
-    dataVersion,
   } = state;
 
   const debouncedFilterTerm = useDebounce(filterTerm, 300);
@@ -83,7 +83,9 @@ function TodosPage() {
 
         dispatch({
           type: TODO_ACTIONS.FETCH_SUCCESS,
-          payload: data.tasks,
+          payload: {
+            todos: data.tasks,
+          },
         });
       } catch (error) {
         const isFilterError =
@@ -109,7 +111,6 @@ function TodosPage() {
     sortBy,
     sortDirection,
     debouncedFilterTerm,
-    dataVersion,
   ]);
 
   async function addTodo(todoTitle) {
@@ -364,3 +365,4 @@ function TodosPage() {
 }
 
 export default TodosPage;
+```
