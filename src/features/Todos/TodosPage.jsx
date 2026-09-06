@@ -268,11 +268,10 @@ return (
     <TodoForm onAddTodo={addTodo} />
 
     <TodoList
-      todoList={todoList}
-      onCompleteTodo={completeTodo}
-      onUpdateTodo={updateTodo}
-      dataVersion={dataVersion}
-    />
+  todoList={todoList}
+  onCompleteTodo={completeTodo}
+  onUpdateTodo={updateTodo}
+/>
   </div>
 );
 
