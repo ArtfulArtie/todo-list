@@ -1,25 +1,16 @@
 export const TODO_ACTIONS = {
-  // Fetch operations
   FETCH_START: 'FETCH_START',
   FETCH_SUCCESS: 'FETCH_SUCCESS',
   FETCH_ERROR: 'FETCH_ERROR',
-
-  // Add todo operations
   ADD_TODO_START: 'ADD_TODO_START',
   ADD_TODO_SUCCESS: 'ADD_TODO_SUCCESS',
   ADD_TODO_ERROR: 'ADD_TODO_ERROR',
-
-  // Complete todo operations
   COMPLETE_TODO_START: 'COMPLETE_TODO_START',
   COMPLETE_TODO_SUCCESS: 'COMPLETE_TODO_SUCCESS',
   COMPLETE_TODO_ERROR: 'COMPLETE_TODO_ERROR',
-
-  // Update todo operations
   UPDATE_TODO_START: 'UPDATE_TODO_START',
   UPDATE_TODO_SUCCESS: 'UPDATE_TODO_SUCCESS',
   UPDATE_TODO_ERROR: 'UPDATE_TODO_ERROR',
-
-  // UI operations
   SET_SORT: 'SET_SORT',
   SET_FILTER: 'SET_FILTER',
   CLEAR_ERROR: 'CLEAR_ERROR',
@@ -73,6 +64,7 @@ export function todoReducer(state, action) {
         ...state,
         todoList: [action.payload, ...state.todoList],
         error: '',
+        filterError: '',
       };
 
     case TODO_ACTIONS.ADD_TODO_SUCCESS:
@@ -85,6 +77,7 @@ export function todoReducer(state, action) {
         ),
         dataVersion: state.dataVersion + 1,
         error: '',
+        filterError: '',
       };
 
     case TODO_ACTIONS.ADD_TODO_ERROR:
@@ -94,6 +87,7 @@ export function todoReducer(state, action) {
           (todo) => todo.id !== action.payload.tempId
         ),
         error: action.payload.error,
+        filterError: '',
       };
 
     case TODO_ACTIONS.COMPLETE_TODO_START:
@@ -101,10 +95,14 @@ export function todoReducer(state, action) {
         ...state,
         todoList: state.todoList.map((todo) =>
           todo.id === action.payload.id
-            ? { ...todo, isCompleted: true }
+            ? {
+                ...todo,
+                isCompleted: true,
+              }
             : todo
         ),
         error: '',
+        filterError: '',
       };
 
     case TODO_ACTIONS.COMPLETE_TODO_SUCCESS:
@@ -112,6 +110,7 @@ export function todoReducer(state, action) {
         ...state,
         dataVersion: state.dataVersion + 1,
         error: '',
+        filterError: '',
       };
 
     case TODO_ACTIONS.COMPLETE_TODO_ERROR:
@@ -123,6 +122,7 @@ export function todoReducer(state, action) {
             : todo
         ),
         error: action.payload.error,
+        filterError: '',
       };
 
     case TODO_ACTIONS.UPDATE_TODO_START:
@@ -134,6 +134,7 @@ export function todoReducer(state, action) {
             : todo
         ),
         error: '',
+        filterError: '',
       };
 
     case TODO_ACTIONS.UPDATE_TODO_SUCCESS:
@@ -141,6 +142,7 @@ export function todoReducer(state, action) {
         ...state,
         dataVersion: state.dataVersion + 1,
         error: '',
+        filterError: '',
       };
 
     case TODO_ACTIONS.UPDATE_TODO_ERROR:
@@ -152,6 +154,7 @@ export function todoReducer(state, action) {
             : todo
         ),
         error: action.payload.error,
+        filterError: '',
       };
 
     case TODO_ACTIONS.SET_SORT:
@@ -159,25 +162,27 @@ export function todoReducer(state, action) {
         ...state,
         sortBy: action.payload.sortBy,
         sortDirection: action.payload.sortDirection,
+        filterError: '',
       };
 
     case TODO_ACTIONS.SET_FILTER:
       return {
         ...state,
         filterTerm: action.payload,
+        filterError: '',
       };
 
     case TODO_ACTIONS.CLEAR_ERROR:
+      if (action.payload?.errorType === 'filterError') {
+        return {
+          ...state,
+          filterError: '',
+        };
+      }
+
       return {
         ...state,
-        error:
-          action.payload === 'error'
-            ? ''
-            : state.error,
-        filterError:
-          action.payload === 'filterError'
-            ? ''
-            : state.filterError,
+        error: '',
       };
 
     case TODO_ACTIONS.RESET_FILTERS:
@@ -188,7 +193,8 @@ export function todoReducer(state, action) {
         sortDirection: 'asc',
         filterError: '',
       };
-default:
-  throw new Error(`Unknown action type: ${action.type}`);
+
+    default:
+      throw new Error(`Unknown action type: ${action.type}`);
   }
 }
