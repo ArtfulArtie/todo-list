@@ -12,7 +12,8 @@ function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const from = location.state?.from || '/todos';
+  // RequireAuth stores the attempted location in state.
+  const from = location.state?.from?.pathname || '/todos';
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -28,6 +29,7 @@ function LoginPage() {
       return;
     }
 
+    // Return the user to the page they originally tried to visit.
     navigate(from, { replace: true });
   };
 
