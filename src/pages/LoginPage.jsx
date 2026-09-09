@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -8,22 +8,15 @@ function LoginPage() {
   const [authError, setAuthError] = useState('');
   const [isLoggingOn, setIsLoggingOn] = useState(false);
 
-  const { login, isAuthenticated } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Remember the page the user originally wanted to visit.
-  const from = location.state?.from?.pathname || '/todos';
-
-  // If the user is already logged in, send them to their intended page.
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate(from, { replace: true });
-    }
-  }, [isAuthenticated, navigate, from]);
+  const from = location.state?.from || '/todos';
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     setIsLoggingOn(true);
     setAuthError('');
 
@@ -35,7 +28,7 @@ function LoginPage() {
       return;
     }
 
-    // The effect above will handle the redirect after authentication.
+    navigate(from, { replace: true });
   };
 
   return (
