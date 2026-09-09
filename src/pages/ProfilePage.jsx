@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 
 function ProfilePage() {
-  const { user, token } = useAuth();
+  const { email, token } = useAuth();
 
   const [stats, setStats] = useState({
     total: 0,
@@ -24,7 +24,7 @@ function ProfilePage() {
       setError('');
 
       try {
-        const response = await fetch('/api/tasks?limit=100', {
+        const response = await fetch('/api/tasks', {
           headers: {
             'X-CSRF-TOKEN': token,
           },
@@ -32,15 +32,22 @@ function ProfilePage() {
         });
 
         if (response.status === 401) {
-          throw new Error('You are not authorized to view this profile.');
+          throw new Error(
+            'You are not authorized to view this profile.'
+          );
         }
 
         if (!response.ok) {
-          throw new Error('Failed to load profile statistics.');
+          throw new Error(
+            'Failed to load profile statistics.'
+          );
         }
 
         const data = await response.json();
-        const todos = data.tasks || [];
+
+        const todos = Array.isArray(data)
+          ? data
+          : data.tasks || [];
 
         const completed = todos.filter(
           (todo) => todo.isCompleted
@@ -63,7 +70,9 @@ function ProfilePage() {
 
   const completionPercentage =
     stats.total > 0
-      ? Math.round((stats.completed / stats.total) * 100)
+      ? Math.round(
+          (stats.completed / stats.total) * 100
+        )
       : 0;
 
   return (
@@ -74,8 +83,11 @@ function ProfilePage() {
         <h2>User Information</h2>
 
         <p>
-          <strong>Name:</strong>{' '}
-          {user?.name || 'User'}
+          <strong>Name:</strong> {email || 'User'}
+        </p>
+
+        <p>
+          <strong>Token:</strong> {token ? 'Authenticated' : 'Not authenticated'}
         </p>
       </section>
 
