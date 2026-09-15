@@ -1,25 +1,14 @@
-import { useAuth } from '../contexts/AuthContext';
+import Navigation from './Navigation';
+import Logoff from '../features/Logoff';
 
 function Header() {
-  const { isAuthenticated, logout } = useAuth();
-
-  const handleLogOut = async () => {
-    const result = await logout();
-
-    if (!result.success) {
-      console.error(result.error);
-    }
-  };
-
   return (
     <header>
-      <h1>Todo List</h1>
+      <h1>Todo App</h1>
 
-      {isAuthenticated && (
-        <button type="button" onClick={handleLogOut}>
-          Log Out
-        </button>
-      )}
+      <Navigation />
+
+      <Logoff />
     </header>
   );
 }
