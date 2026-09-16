@@ -1380,3 +1380,24 @@ input[type='text'] {
   }
 }
 
+
+.todo-title-button {
+  border: none;
+  padding: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.todo-title-button:hover {
+  text-decoration: underline;
+}
+
+.todo-title-button:focus-visible {
+  outline: 3px solid #d68936;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+

@@ -69,9 +69,14 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
               />
             </label>
 
-            <span onClick={() => setIsEditing(true)}>
+            <button
+              type="button"
+              className="todo-title-button"
+              onClick={() => setIsEditing(true)}
+              aria-label={`Edit todo: ${todo.title}`}
+            >
               {todo.title}
-            </span>
+            </button>
           </>
         )}
       </form>
@@ -80,3 +85,5 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
 }
 
 export default TodoListItem;
+
+
