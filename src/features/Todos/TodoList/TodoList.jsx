@@ -47,12 +47,12 @@ function TodoList({
   };
 
   if (filteredTodoList.todos.length === 0) {
-  return (
-    <p className="todo-empty">
-      {getEmptyMessage()}
-    </p>
-  );
-}
+    return (
+      <p className="todo-empty">
+        {getEmptyMessage()}
+      </p>
+    );
+  }
 
   return (
     <ul className="todo-list">
@@ -69,4 +69,6 @@ function TodoList({
 }
 
 export default TodoList;
+
+
 

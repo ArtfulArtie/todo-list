@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import TextInputWithLabel from '../../../shared/TextInputWithLabel';
+import { isValidTodoTitle } from '../../../utils/todoValidation';
 
 function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -18,7 +19,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
   const handleUpdate = (event) => {
     event.preventDefault();
 
-    if (!isEditing || !workingTitle.trim()) {
+    if (!isEditing || !isValidTodoTitle(workingTitle)) {
       return;
     }
 
@@ -35,14 +36,15 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
       <form className="todo-item-form" onSubmit={handleUpdate}>
         {isEditing ? (
           <>
-           <div className="todo-edit-input">
-             <TextInputWithLabel
-              elementId={`todoTitle${todo.id}`}
-              labelText="Todo"
-              ref={inputRef}
-              value={workingTitle}
-              onChange={handleEdit}
-            />
+            <div className="todo-edit-input">
+              <TextInputWithLabel
+                elementId={`todoTitle${todo.id}`}
+                labelText="Todo"
+                ref={inputRef}
+                value={workingTitle}
+                onChange={handleEdit}
+                maxLength={100}
+              />
             </div>
 
             <button type="button" onClick={handleCancel}>
@@ -51,7 +53,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
 
             <button
               type="submit"
-              disabled={!workingTitle.trim()}
+              disabled={!isValidTodoTitle(workingTitle)}
             >
               Update
             </button>
