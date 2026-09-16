@@ -5,7 +5,7 @@ function SortBy({
   onSortDirectionChange,
 }) {
   return (
-    <div>
+    <div className="sort-controls">
       <label htmlFor="sort-by">Sort by</label>
 
       <select

@@ -15,7 +15,7 @@ function HomePage() {
   }, [isAuthenticated, navigate]);
 
   return (
-    <div>
+    <div className="home-page">
       <p>Redirecting...</p>
     </div>
   );

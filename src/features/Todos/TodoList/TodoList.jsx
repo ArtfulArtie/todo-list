@@ -47,11 +47,15 @@ function TodoList({
   };
 
   if (filteredTodoList.todos.length === 0) {
-    return <p>{getEmptyMessage()}</p>;
-  }
+  return (
+    <p className="todo-empty">
+      {getEmptyMessage()}
+    </p>
+  );
+}
 
   return (
-    <ul>
+    <ul className="todo-list">
       {filteredTodoList.todos.map((todo) => (
         <TodoListItem
           key={todo.id}

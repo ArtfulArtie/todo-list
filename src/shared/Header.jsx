@@ -3,8 +3,8 @@ import Logoff from '../features/Logoff';
 
 function Header() {
   return (
-    <header>
-      <h1>Todo App</h1>
+    <header className="site-header">
+      <h1 className="site-title">Todo App</h1>
 
       <Navigation />
 

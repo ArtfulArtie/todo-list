@@ -75,52 +75,61 @@ function ProfilePage() {
         )
       : 0;
 
-  return (
-    <main>
-      <h1>Profile</h1>
+ return (
+  <main className="profile-page">
+    <h1>Profile</h1>
 
-      <section>
-        <h2>User Information</h2>
+    <section className="profile-section">
+      <h2>User Information</h2>
 
-        <p>
-          <strong>Name:</strong> {email || 'User'}
+      <p>
+        <strong>Name:</strong> {email || 'User'}
+      </p>
+
+      <p>
+        <strong>Token:</strong>{' '}
+        {token ? 'Authenticated' : 'Not authenticated'}
+      </p>
+    </section>
+
+    <section className="profile-section">
+      <h2>Todo Statistics</h2>
+
+      {isLoading && (
+        <p className="profile-status">
+          Loading statistics...
         </p>
+      )}
 
-        <p>
-          <strong>Token:</strong> {token ? 'Authenticated' : 'Not authenticated'}
+      {error && (
+        <p className="profile-error">
+          {error}
         </p>
-      </section>
+      )}
 
-      <section>
-        <h2>Todo Statistics</h2>
+      {!isLoading && !error && (
+        <div className="profile-stats">
+          <p>
+            <strong>Total Todos:</strong> {stats.total}
+          </p>
 
-        {isLoading && <p>Loading statistics...</p>}
+          <p>
+            <strong>Completed:</strong> {stats.completed}
+          </p>
 
-        {error && <p>{error}</p>}
+          <p>
+            <strong>Active:</strong> {stats.active}
+          </p>
 
-        {!isLoading && !error && (
-          <div>
-            <p>
-              <strong>Total Todos:</strong> {stats.total}
-            </p>
-
-            <p>
-              <strong>Completed:</strong> {stats.completed}
-            </p>
-
-            <p>
-              <strong>Active:</strong> {stats.active}
-            </p>
-
-            <p>
-              <strong>Completion Rate:</strong>{' '}
-              {completionPercentage}%
-            </p>
-          </div>
-        )}
-      </section>
-    </main>
-  );
+          <p>
+            <strong>Completion Rate:</strong>{' '}
+            {completionPercentage}%
+          </p>
+        </div>
+      )}
+    </section>
+  </main>
+);
 }
 
 export default ProfilePage;

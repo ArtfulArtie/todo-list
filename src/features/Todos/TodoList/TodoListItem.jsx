@@ -31,17 +31,19 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
   };
 
   return (
-    <li>
-      <form onSubmit={handleUpdate}>
+    <li className="todo-item">
+      <form className="todo-item-form" onSubmit={handleUpdate}>
         {isEditing ? (
           <>
-            <TextInputWithLabel
+           <div className="todo-edit-input">
+             <TextInputWithLabel
               elementId={`todoTitle${todo.id}`}
               labelText="Todo"
               ref={inputRef}
               value={workingTitle}
               onChange={handleEdit}
             />
+            </div>
 
             <button type="button" onClick={handleCancel}>
               Cancel

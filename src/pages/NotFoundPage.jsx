@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 
 function NotFoundPage() {
   return (
-    <main>
+    <main className="not-found-page">
       <h1>404 - Page Not Found</h1>
 
       <p>

@@ -1,0 +1,1356 @@
+/* =========================
+   Global styles
+   ========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  background-color: #f8efe3;
+  color: #8b413e;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  outline: 3px solid #d68936;
+  outline-offset: 2px;
+}
+
+
+/* =========================
+   Header
+   ========================= */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  padding: 1rem 2rem;
+
+  background-color: #8b413e;
+  color: #fff8ee;
+
+  border-bottom: 5px double #d68936;
+
+  box-shadow: 0 5px 14px rgba(91, 48, 42, 0.3);
+}
+
+.site-title {
+  margin: 0;
+
+  font-size: 2rem;
+
+  color: #fff8ee;
+
+  letter-spacing: 0.03em;
+}
+
+
+/* =========================
+   General page layout
+   ========================= */
+
+main {
+  width: min(100% - 2rem, 900px);
+  margin: 2rem auto;
+}
+
+
+/* =========================
+   Todo Page
+   ========================= */
+
+.todos-page {
+  width: min(100% - 2rem, 900px);
+  margin: 2rem auto;
+}
+
+.todos-intro {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.todos-intro h2 {
+  margin: 0;
+
+  font-size: 2.8rem;
+  font-weight: 500;
+
+  color: #8b413e;
+
+  text-shadow: 2px 2px 0 #d68936;
+}
+
+.todos-intro p {
+  margin: 0.5rem 0 0;
+
+  font-size: 1.1rem;
+
+  color: #9f4332;
+}
+
+
+/* =========================
+   Todo List
+   ========================= */
+
+.todo-list {
+  list-style: none;
+
+  padding: 0;
+  margin: 1.5rem auto;
+
+  width: 100%;
+  max-width: 700px;
+}
+
+
+/* =========================
+   Todo Items
+   ========================= */
+
+.todo-item {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.todo-item-form {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  width: 100%;
+
+  padding: 1rem 1.25rem;
+
+  border: 4px double #8b413e;
+  border-radius: 12px;
+
+  box-shadow: 0 4px 8px rgba(139, 65, 62, 0.15);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+
+/* =========================
+   Rotating todo colors
+   ========================= */
+
+/* Orange */
+.todo-item:nth-child(5n + 1) .todo-item-form {
+  background-color: #d68936;
+  color: #fff8ee;
+}
+
+/* Terracotta */
+.todo-item:nth-child(5n + 2) .todo-item-form {
+  background-color: #d27649;
+  color: #fff8ee;
+}
+
+/* Coral */
+.todo-item:nth-child(5n + 3) .todo-item-form {
+  background-color: #c96654;
+  color: #fff8ee;
+}
+
+/* Deep terracotta */
+.todo-item:nth-child(5n + 4) .todo-item-form {
+  background-color: #9f4332;
+  color: #fff8ee;
+}
+
+/* Dark wine */
+.todo-item:nth-child(5n + 5) .todo-item-form {
+  background-color: #8b413e;
+  color: #fff8ee;
+}
+
+
+/* =========================
+   Todo hover
+   ========================= */
+
+.todo-item-form:hover {
+  transform: translateY(-4px) scale(1.01);
+
+  border-color: #f8efe3;
+
+  box-shadow: 0 8px 16px rgba(91, 48, 42, 0.3);
+}
+
+
+/* =========================
+   Todo text
+   ========================= */
+
+.todo-item-form span {
+  flex: 1;
+
+  color: inherit;
+
+  font-size: 1.1rem;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.todo-item-form span:hover {
+  color: #fff8ee;
+}
+
+
+/* =========================
+   Todo Edit Inputs
+   ========================= */
+
+.todo-edit-input {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
+  padding: 0.25rem;
+}
+
+.todo-edit-input input[type='text'] {
+  flex: 1;
+  min-width: 0;
+  padding: 0.6rem 0.75rem;
+
+  border: 2px solid #8b413e;
+  border-radius: 6px;
+
+  background-color: #fff8ee;
+  color: #8b413e;
+}
+
+.todo-item-form input[type='text'] {
+  flex: 1;
+  min-width: 0;
+  margin: 0 0.5rem;
+  padding: 0.6rem 0.75rem;
+
+  border: 2px solid #8b413e;
+  border-radius: 6px;
+
+  background-color: #fff8ee;
+  color: #8b413e;
+}
+
+
+/* =========================
+   Buttons
+   ========================= */
+
+button {
+  min-height: 44px;
+
+  padding: 10px 20px;
+
+  font-size: 1rem;
+  font-weight: 600;
+
+  border: 2px solid #8b413e;
+  border-radius: 8px;
+
+  background-color: #d68936;
+
+  color: #f0e0c9;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-3px);
+
+  background-color: #c96654;
+
+  box-shadow: 0 5px 10px rgba(139, 65, 62, 0.25);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(1px);
+
+  box-shadow: 0 2px 4px rgba(139, 65, 62, 0.2);
+}
+
+
+/* =========================
+   Opposite-color todo buttons
+   ========================= */
+
+.todo-item:nth-child(5n + 1) button {
+  background-color: #8b413e;
+}
+
+.todo-item:nth-child(5n + 2) button {
+  background-color: #9f4332;
+}
+
+.todo-item:nth-child(5n + 3) button {
+  background-color: #c96654;
+}
+
+.todo-item:nth-child(5n + 4) button {
+  background-color: #d27649;
+}
+
+.todo-item:nth-child(5n + 5) button {
+  background-color: #d68936;
+}
+
+.todo-item:nth-child(5n + 1) button:hover:not(:disabled) {
+  background-color: #9f4332;
+}
+
+
+/* =========================
+   Links
+   ========================= */
+
+a {
+  color: #9f4332;
+}
+
+a:hover {
+  color: #d68936;
+}
+
+
+/* =========================
+   Sort Controls
+   ========================= */
+
+.sort-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  width: 600px;
+  max-width: calc(100% - 2rem);
+
+  margin: 1rem auto;
+  padding: 0.75rem 1rem;
+
+  background-color: #f8d8c8;
+  border: 2px solid #d27649;
+  border-radius: 8px;
+
+  color: #8b413e;
+  font-weight: 600;
+
+  box-shadow: 0 3px 6px rgba(139, 65, 62, 0.15);
+}
+
+
+/* =========================
+   Sort Dropdowns
+   ========================= */
+
+.sort-controls select {
+  padding: 0.45rem 0.6rem;
+
+  border: 2px solid #8b413e;
+  border-radius: 6px;
+
+  background-color: #fff8ee;
+  color: #8b413e;
+
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+/* =========================
+   Sort Controls Focus
+   ========================= */
+
+.sort-controls select:focus-visible {
+  outline: 3px solid #d68936;
+  outline-offset: 2px;
+}
+
+
+/* =========================
+   Status Filter
+   ========================= */
+
+.status-filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  width: 600px;
+  max-width: calc(100% - 2rem);
+
+  margin: 1rem auto;
+  padding: 0.75rem 1rem;
+
+  background-color: #eeb9a1;
+  border: 2px solid #9f4332;
+  border-radius: 8px;
+
+  box-shadow: 0 3px 6px rgba(139, 65, 62, 0.2);
+
+  color: #681d10;
+  font-weight: 600;
+}
+
+
+/* =========================
+   Status Filter Dropdown
+   ========================= */
+
+.status-filter select {
+  padding: 0.45rem 0.6rem;
+
+  border: 2px solid #8b413e;
+  border-radius: 6px;
+
+  background-color: #fff8ee;
+  color: #8b413e;
+
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+/* =========================
+   Status Filter Focus
+   ========================= */
+
+.status-filter select:focus-visible {
+  outline: 3px solid #d68936;
+  outline-offset: 2px;
+}
+
+
+/* =========================
+   Add Todo Form
+   ========================= */
+
+.todo-form {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  width: min(100% - 2rem, 600px);
+  margin: 0 auto 2rem;
+
+  padding: 1rem;
+
+  background-color: #681d10;
+  border: 3px double #350503;
+  border-radius: 10px;
+
+  box-shadow: 0 4px 8px rgba(139, 65, 62, 0.15);
+}
+
+
+/* =========================
+   Add Todo Form Text
+   ========================= */
+
+.todo-form label {
+  color: #fff8ee;
+  font-weight: 600;
+}
+
+
+/* =========================
+   Add Todo Input
+   ========================= */
+
+.todo-form input[type='text'] {
+  flex: 1;
+  min-width: 0;
+
+  padding: 0.65rem 0.75rem;
+
+  border: 2px solid #d68936;
+  border-radius: 6px;
+
+  background-color: #fff8ee;
+  color: #681d10;
+
+  font-weight: 600;
+}
+
+
+/* =========================
+   Add Todo Button
+   ========================= */
+
+.todo-form button {
+  color: #681d10;
+}
+
+
+/* =========================
+   Shared Text Inputs
+   ========================= */
+
+label {
+  color: #8b413e;
+  font-weight: 600;
+}
+
+input[type='text'] {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+
+/* =========================
+   Filter Input
+   ========================= */
+
+.filter-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+
+  width: 600px;
+  max-width: calc(100% - 2rem);
+
+  margin: 1rem auto;
+  padding: 0.75rem 1rem;
+
+  background-color: #d27649;
+  border: 2px solid #8b413e;
+  border-radius: 8px;
+
+  color: #fff8ee;
+  font-weight: 600;
+
+  box-shadow: 0 3px 6px rgba(139, 65, 62, 0.2);
+}
+
+
+/* =========================
+   Filter Input Label
+   ========================= */
+
+.filter-input label {
+  color: #fff8ee;
+  font-weight: 700;
+}
+
+
+/* =========================
+   Filter Search Box
+   ========================= */
+
+.filter-input input {
+  flex: 1;
+  min-width: 0;
+
+  padding: 0.45rem 0.6rem;
+
+  border: 2px solid #8b413e;
+  border-radius: 6px;
+
+  background-color: #fff8ee;
+  color: #681d10;
+
+  font-weight: 600;
+}
+
+
+/* =========================
+   Filter Placeholder
+   ========================= */
+
+.filter-input input::placeholder {
+  color: #9f4332;
+  opacity: 0.8;
+}
+
+
+/* =========================
+   Todo States
+   ========================= */
+
+
+/* =========================
+   Empty State
+   ========================= */
+
+.todo-empty {
+  width: min(100% - 2rem, 600px);
+  margin: 2rem auto;
+  padding: 1.5rem;
+
+  background-color: #f8d8c8;
+  border: 3px double #d27649;
+  border-radius: 10px;
+
+  color: #8b413e;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+
+  box-shadow: 0 4px 8px rgba(139, 65, 62, 0.15);
+}
+
+
+/* =========================
+   Loading State
+   ========================= */
+
+.todo-loading {
+  width: min(100% - 2rem, 600px);
+  margin: 1rem auto;
+  padding: 1rem 1.25rem;
+
+  background-color: #f8d8c8;
+  border: 3px double #d27649;
+  border-radius: 10px;
+
+  color: #8b413e;
+  text-align: center;
+  font-weight: 600;
+
+  box-shadow: 0 4px 8px rgba(139, 65, 62, 0.15);
+}
+
+
+/* =========================
+   Error State
+   ========================= */
+
+.todo-error {
+  width: min(100% - 2rem, 600px);
+  margin: 1rem auto;
+  padding: 1rem 1.25rem;
+
+  background-color: #9f4332;
+  border: 3px double #681d10;
+  border-radius: 10px;
+
+  color: #f8efe3;
+  text-align: center;
+  font-weight: 600;
+
+  box-shadow: 0 4px 8px rgba(139, 65, 62, 0.2);
+}
+
+
+/* =========================
+   Filter Error State
+   ========================= */
+
+.todo-filter-error {
+  width: min(100% - 2rem, 600px);
+  margin: 1rem auto;
+  padding: 1rem 1.25rem;
+
+  background-color: #d27649;
+  border: 3px double #9f4332;
+  border-radius: 10px;
+
+  color: #681d10;
+  text-align: center;
+  font-weight: 600;
+
+  box-shadow: 0 4px 8px rgba(139, 65, 62, 0.18);
+}
+
+
+/* =========================
+   Todo State Buttons
+   ========================= */
+
+.todo-error button,
+.todo-filter-error button {
+  margin: 0.35rem;
+}
+
+
+/* =========================
+   Completed Todo
+   ========================= */
+
+.todo-item-form:has(input[type='checkbox']:checked) {
+  opacity: 0.75;
+}
+
+
+/* =========================
+   Completed Todo Text
+   ========================= */
+
+.todo-item-form:has(input[type='checkbox']:checked) span {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+
+/* =========================
+   Completed Todo Hover
+   ========================= */
+
+.todo-item-form:has(input[type='checkbox']:checked):hover {
+  opacity: 0.9;
+}
+
+
+/* =========================
+   Todo Text Gradient Contrast
+   ========================= */
+
+.todo-item:nth-child(5n + 1) .todo-item-form span {
+  color: #681d10;
+}
+
+.todo-item:nth-child(5n + 2) .todo-item-form span {
+  color: #5f211e;
+}
+
+.todo-item:nth-child(5n + 3) .todo-item-form span {
+  color: #f0e0c9;
+}
+
+.todo-item:nth-child(5n + 4) .todo-item-form span {
+  color: #f8d8c8;
+}
+
+.todo-item:nth-child(5n + 5) .todo-item-form span {
+  color: #f8efe3;
+}
+
+
+/* =========================
+   Edit Todo Label Gradient Contrast
+   ========================= */
+
+.todo-item:nth-child(5n + 1) .todo-item-form label {
+  color: #8b413e;
+}
+
+.todo-item:nth-child(5n + 2) .todo-item-form label {
+  color: #8b413e;
+}
+
+.todo-item:nth-child(5n + 3) .todo-item-form label {
+  color: #681d10;
+}
+
+.todo-item:nth-child(5n + 4) .todo-item-form label {
+  color: #f8d8c8;
+}
+
+.todo-item:nth-child(5n + 5) .todo-item-form label {
+  color: #f8efe3;
+}
+
+
+/* =========================
+   Header Log Out Button
+   ========================= */
+
+.site-header > button {
+  min-height: 40px;
+  padding: 0.45rem 0.9rem;
+
+  border: 2px solid #f8d8c8;
+  border-radius: 8px;
+
+  background-color: #d27649;
+  color: #f8efe3;
+
+  font-family: inherit;
+  font-weight: 600;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+/* =========================
+   Header Log Out Hover
+   ========================= */
+
+.site-header > button:hover {
+  background-color: #dcaba2;
+  color: #fff8ee;
+  transform: translateY(-2px);
+
+  box-shadow: 0 4px 8px rgba(53, 5, 3, 0.3);
+}
+
+
+/* =========================
+   Header Log Out Active
+   ========================= */
+
+.site-header > button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(53, 5, 3, 0.2);
+}
+
+
+/* =========================
+   Login Form
+   ========================= */
+
+.login-form {
+  width: min(100% - 2rem, 500px);
+  margin: 3rem auto;
+  padding: 2rem;
+
+  background-color: #d68936;
+  border: 4px double #8b413e;
+  border-radius: 12px;
+
+  box-shadow: 0 8px 18px rgba(91, 48, 42, 0.2);
+}
+
+
+/* =========================
+   Login Title
+   ========================= */
+
+.login-title {
+  margin: 0 0 1.5rem;
+  text-align: center;
+  color: #fff8ee;
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+
+
+/* =========================
+   Login Fields
+   ========================= */
+
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-bottom: 1.25rem;
+}
+
+
+/* =========================
+   Login Field Labels
+   ========================= */
+
+.login-field label {
+  color: #681d10;
+  font-weight: 700;
+}
+
+
+/* =========================
+   Login Field Inputs
+   ========================= */
+
+.login-field input {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+
+  border: 2px solid #8b413e;
+  border-radius: 7px;
+
+  background-color: #fff8ee;
+  color: #681d10;
+
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+
+/* =========================
+   Login Field Focus
+   ========================= */
+
+.login-field input:focus {
+  border-color: #681d10;
+  outline: 3px solid #f8d8c8;
+  outline-offset: 2px;
+}
+
+
+/* =========================
+   Login Error
+   ========================= */
+
+.login-error {
+  margin: 0 0 1.25rem;
+  padding: 0.75rem 1rem;
+
+  background-color: #9f4332;
+  border: 2px solid #681d10;
+  border-radius: 7px;
+
+  color: #fff8ee;
+  font-weight: 600;
+  text-align: center;
+}
+
+
+/* =========================
+   Login Button
+   ========================= */
+
+.login-form > button {
+  width: 100%;
+  margin-top: 0.5rem;
+
+  background-color: #8b413e;
+  color: #fff8ee;
+
+  border-color: #681d10;
+}
+
+
+/* =========================
+   Login Button Hover
+   ========================= */
+
+.login-form > button:hover:not(:disabled) {
+  background-color: #9f4332;
+  color: #fff8ee;
+}
+
+
+/* =========================
+   Login Button Disabled
+   ========================= */
+
+.login-form > button:disabled {
+  background-color: #8b413e;
+  color: #f8d8c8;
+  opacity: 0.65;
+}
+
+
+/* =========================
+   About Page
+   ========================= */
+
+.about-page {
+  width: min(100% - 2rem, 800px);
+  margin: 3rem auto;
+  padding: 2rem;
+
+  background-color: #681d10;
+
+  border: 4px double #8b413e;
+  border-radius: 12px;
+
+  box-shadow: 0 8px 18px rgba(91, 48, 42, 0.2);
+}
+
+
+/* =========================
+   About Page Title
+   ========================= */
+
+.about-page h1 {
+  margin: 0 0 1.5rem;
+
+  text-align: center;
+
+  color: #fff8ee;
+
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+
+/* =========================
+   About Page Headings
+   ========================= */
+
+.about-page h2 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+
+  color: #f8d8c8;
+
+  font-size: 1.5rem;
+}
+
+
+/* =========================
+   About Page Text
+   ========================= */
+
+.about-page p {
+  color: #fff8ee;
+
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+
+/* =========================
+   About Page Lists
+   ========================= */
+
+.about-page ul {
+  padding-left: 1.5rem;
+
+  color: #fff8ee;
+}
+
+
+/* =========================
+   About Page List Items
+   ========================= */
+
+.about-page li {
+  margin-bottom: 0.5rem;
+
+  color: #fff8ee;
+
+  line-height: 1.5;
+}
+
+
+/* =========================
+   About Page List Markers
+   ========================= */
+
+.about-page li::marker {
+  color: #d68936;
+}
+
+
+/* =========================
+   Profile Page
+   ========================= */
+
+.profile-page {
+  width: min(100% - 2rem, 800px);
+  margin: 3rem auto;
+  padding: 2rem;
+
+  background-color: #681d10;
+
+  border: 4px double #8b413e;
+  border-radius: 12px;
+
+  box-shadow: 0 8px 18px rgba(91, 48, 42, 0.2);
+}
+
+
+/* =========================
+   Profile Page Title
+   ========================= */
+
+.profile-page > h1 {
+  margin: 0 0 1.5rem;
+
+  text-align: center;
+
+  color: #fff8ee;
+
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+
+/* =========================
+   Profile Sections
+   ========================= */
+
+.profile-section {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+
+  background-color: #8b413e;
+
+  border: 3px double #d68936;
+  border-radius: 10px;
+}
+
+
+/* =========================
+   Profile Section Headings
+   ========================= */
+
+.profile-section h2 {
+  margin: 0 0 1rem;
+
+  color: #f8d8c8;
+
+  font-size: 1.5rem;
+}
+
+
+/* =========================
+   Profile Information
+   ========================= */
+
+.profile-section p {
+  margin: 0.6rem 0;
+
+  color: #fff8ee;
+
+  line-height: 1.6;
+}
+
+
+/* =========================
+   Profile Labels
+   ========================= */
+
+.profile-section strong {
+  color: #f8d8c8;
+}
+
+
+/* =========================
+   Profile Statistics
+   ========================= */
+
+.profile-stats {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 0.75rem;
+}
+
+
+/* =========================
+   Profile Statistic Cards
+   ========================= */
+
+.profile-stats p {
+  margin: 0;
+  padding: 0.75rem;
+
+  background-color: #f0e0c9;
+
+  border: 2px solid #d68936;
+  border-radius: 7px;
+
+  color: #681d10;
+}
+
+
+/* =========================
+   Profile Statistic Labels
+   ========================= */
+
+.profile-stats strong {
+  color: #8b413e;
+}
+
+
+/* =========================
+   Profile Loading State
+   ========================= */
+
+.profile-status {
+  color: #f8d8c8 !important;
+  text-align: center;
+}
+
+
+/* =========================
+   Profile Error State
+   ========================= */
+
+.profile-error {
+  color: #fff8ee !important;
+
+  background-color: #c96654;
+
+  padding: 0.75rem;
+
+  border-radius: 7px;
+}
+
+
+/* =========================
+   Not Found Page
+   ========================= */
+
+.not-found-page {
+  width: min(100% - 2rem, 700px);
+  margin: 4rem auto;
+  padding: 3rem 2rem;
+
+  background-color: #681d10;
+
+  border: 4px double #d68936;
+  border-radius: 12px;
+
+  box-shadow: 0 8px 18px rgba(91, 48, 42, 0.2);
+
+  text-align: center;
+}
+
+
+/* =========================
+   Not Found Title
+   ========================= */
+
+.not-found-page h1 {
+  margin: 0 0 1.5rem;
+
+  color: #fff8ee;
+
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+
+/* =========================
+   Not Found Message
+   ========================= */
+
+.not-found-page p {
+  margin: 1rem 0;
+
+  color: #f8d8c8;
+
+  font-size: 1.1rem;
+}
+
+
+/* =========================
+   Not Found Links
+   ========================= */
+
+.not-found-page a {
+  color: #d68936;
+
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+/* =========================
+   Not Found Link Hover
+   ========================= */
+
+.not-found-page a:hover {
+  color: #f0e0c9;
+  text-decoration: underline;
+}
+
+
+/* =========================
+   Home Page
+   ========================= */
+
+.home-page {
+  width: min(100% - 2rem, 500px);
+  margin: 4rem auto;
+  padding: 2rem;
+
+  background-color: #681d10;
+
+  border: 4px double #d68936;
+  border-radius: 12px;
+
+  box-shadow: 0 8px 18px rgba(91, 48, 42, 0.2);
+
+  text-align: center;
+}
+
+
+/* =========================
+   Home Page Message
+   ========================= */
+
+.home-page p {
+  margin: 0;
+
+  color: #fff8ee;
+
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+
+/* =========================
+   Responsive styles
+   ========================= */
+
+@media (max-width: 600px) {
+  .site-header {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  main,
+  .todos-page {
+    width: min(100% - 1rem, 900px);
+    margin: 1rem auto;
+  }
+
+  .todos-intro h2 {
+    font-size: 2rem;
+  }
+
+  .todos-intro p {
+    font-size: 1rem;
+  }
+
+  .todo-item-form {
+    padding: 0.85rem;
+  }
+
+  button {
+    min-height: 44px;
+  }
+
+  .profile-page {
+    padding: 1.25rem;
+  }
+
+  .profile-stats {
+    grid-template-columns: 1fr;
+  }
+}

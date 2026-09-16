@@ -34,39 +34,41 @@ function LoginPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Log In</h1>
+   <form className="login-form" onSubmit={handleSubmit}>
+  <h1 className="login-title">Log In</h1>
 
-      {authError && <p>{authError}</p>}
+  {authError && (
+    <p className="login-error">{authError}</p>
+  )}
 
-      <div>
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          required
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-        />
-      </div>
+  <div className="login-field">
+    <label htmlFor="email">Email</label>
+    <input
+      id="email"
+      name="email"
+      type="email"
+      required
+      value={email}
+      onChange={(event) => setEmail(event.target.value)}
+    />
+  </div>
 
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          required
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-        />
-      </div>
+  <div className="login-field">
+    <label htmlFor="password">Password</label>
+    <input
+      id="password"
+      name="password"
+      type="password"
+      required
+      value={password}
+      onChange={(event) => setPassword(event.target.value)}
+    />
+  </div>
 
-      <button type="submit" disabled={isLoggingOn}>
-        {isLoggingOn ? 'Logging in...' : 'Log On'}
-      </button>
-    </form>
+  <button type="submit" disabled={isLoggingOn}>
+    {isLoggingOn ? 'Logging in...' : 'Log On'}
+  </button>
+</form>
   );
 }
 
