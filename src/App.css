@@ -433,31 +433,45 @@ a:hover {
 
 
 /* =========================
-   Status Filter Dropdown
+   Status Filter Links
    ========================= */
 
-.status-filter select {
-  padding: 0.45rem 0.6rem;
-
+.status-filter a {
+  padding: 0.45rem 0.7rem;
   border: 2px solid #8b413e;
   border-radius: 6px;
-
   background-color: #fff8ee;
   color: #8b413e;
-
   font-weight: 600;
+  text-decoration: none;
   cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+.status-filter a:hover {
+  background-color: #8b413e;
+  color: #fff8ee;
+}
+
+/* =========================
+   Active Status Link
+   ========================= */
+
+.status-filter a.active {
+  background-color: #8b413e;
+  color: #fff8ee;
+}
 
 /* =========================
    Status Filter Focus
    ========================= */
 
-.status-filter select:focus-visible {
+.status-filter a:focus-visible {
   outline: 3px solid #d68936;
   outline-offset: 2px;
 }
+
+
 
 
 /* =========================
@@ -1354,3 +1368,15 @@ input[type='text'] {
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 600px) {
+  .status-filter {
+    flex-wrap: wrap;
+  }
+
+  .status-filter a {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+}
+
