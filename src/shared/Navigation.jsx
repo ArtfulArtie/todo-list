@@ -1,26 +1,20 @@
 import { NavLink } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
+import styles from './Navigation.module.css';
 
 function Navigation() {
   const { isAuthenticated } = useAuth();
 
-  const navLinkStyle = ({ isActive }) => ({
-    fontWeight: isActive ? 'bold' : 'normal',
-    textDecoration: isActive ? 'underline' : 'none',
-  });
-
   return (
     <nav>
-      <ul
-        style={{
-          display: 'flex',
-          listStyle: 'none',
-          gap: '1rem',
-          padding: 0,
-        }}
-      >
+      <ul className={styles.navigationList}>
         <li>
-          <NavLink to="/about" style={navLinkStyle}>
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              `${styles.navigationLink} ${isActive ? styles.active : ''}`
+            }
+          >
             About
           </NavLink>
         </li>
@@ -28,20 +22,35 @@ function Navigation() {
         {isAuthenticated ? (
           <>
             <li>
-              <NavLink to="/todos" style={navLinkStyle}>
+              <NavLink
+                to="/todos"
+                className={({ isActive }) =>
+                  `${styles.navigationLink} ${isActive ? styles.active : ''}`
+                }
+              >
                 Todos
               </NavLink>
             </li>
 
             <li>
-              <NavLink to="/profile" style={navLinkStyle}>
+              <NavLink
+                to="/profile"
+                className={({ isActive }) =>
+                  `${styles.navigationLink} ${isActive ? styles.active : ''}`
+                }
+              >
                 Profile
               </NavLink>
             </li>
           </>
         ) : (
           <li>
-            <NavLink to="/login" style={navLinkStyle}>
+            <NavLink
+              to="/login"
+              className={({ isActive }) =>
+                `${styles.navigationLink} ${isActive ? styles.active : ''}`
+              }
+            >
               Login
             </NavLink>
           </li>
@@ -52,3 +61,4 @@ function Navigation() {
 }
 
 export default Navigation;
+

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 
 function Logon() {
   const [email, setEmail] = useState('');
@@ -24,10 +24,12 @@ function Logon() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {authError && <p>{authError}</p>}
+    <form className="login-form" onSubmit={handleSubmit}>
+      {authError && (
+        <p className="login-error">{authError}</p>
+      )}
 
-      <div>
+      <div className="login-field">
         <label htmlFor="email">Email</label>
         <input
           id="email"
@@ -39,7 +41,7 @@ function Logon() {
         />
       </div>
 
-      <div>
+      <div className="login-field">
         <label htmlFor="password">Password</label>
         <input
           id="password"
@@ -59,3 +61,5 @@ function Logon() {
 }
 
 export default Logon;
+
+

@@ -310,11 +310,16 @@ function TodosPage() {
     }
   }
 
-  return (
-    <div>
-      {error && (
-        <div>
-          <p>{error}</p>
+return (
+  <main className="todos-page">
+    <section className="todos-intro">
+      <h2>My Todos</h2>
+      <p>Stay organized and keep track of what needs to get done.</p>
+    </section>
+
+    {error && (
+      <div className="todo-error">
+         <p>{error}</p>
 
           <button
             type="button"
@@ -333,7 +338,7 @@ function TodosPage() {
       )}
 
       {filterError && (
-        <div>
+       <div className="todo-filter-error">
           <p>{filterError}</p>
 
           <button
@@ -363,7 +368,9 @@ function TodosPage() {
         </div>
       )}
 
-      {isTodoListLoading && <p>Loading todos...</p>}
+      {isTodoListLoading && (
+  <p className="todo-loading">Loading todos...</p>
+  )}
 
       <SortBy
         sortBy={sortBy}
@@ -404,7 +411,7 @@ function TodosPage() {
         dataVersion={dataVersion}
         statusFilter={statusFilter}
       />
-    </div>
+    </main>
   );
 }
 

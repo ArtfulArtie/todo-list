@@ -1,35 +1,22 @@
-import { useSearchParams } from 'react-router';
+import { NavLink } from 'react-router';
 
 function StatusFilter() {
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const currentStatus = searchParams.get('status') || 'all';
-
-  const handleStatusChange = (status) => {
-    if (status === 'all') {
-      searchParams.delete('status');
-    } else {
-      searchParams.set('status', status);
-    }
-
-    setSearchParams(searchParams);
-  };
-
   return (
-    <div>
-      <label htmlFor="statusFilter">Show: </label>
+    <nav className="status-filter" aria-label="Todo status">
+      <span>Show: </span>
 
-      <select
-        id="statusFilter"
-        value={currentStatus}
-        onChange={(event) => handleStatusChange(event.target.value)}
-      >
-        <option value="all">All Todos</option>
-        <option value="active">Active Todos</option>
-        <option value="completed">Completed Todos</option>
-      </select>
-    </div>
+      <NavLink to="/todos">All Todos</NavLink>
+
+      <NavLink to="/todos?status=active">
+        Active Todos
+      </NavLink>
+
+      <NavLink to="/todos?status=completed">
+        Completed Todos
+      </NavLink>
+    </nav>
   );
 }
 
 export default StatusFilter;
+

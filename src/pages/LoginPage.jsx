@@ -12,16 +12,32 @@ function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // RequireAuth stores the attempted location in state.
   const from = location.state?.from?.pathname || '/todos';
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    const trimmedEmail = email.trim();
+
+    if (!trimmedEmail) {
+      setAuthError('Please enter your email address.');
+      return;
+    }
+
+    if (!trimmedEmail.includes('@')) {
+      setAuthError('Please enter a valid email address.');
+      return;
+    }
+
+    if (!password) {
+      setAuthError('Please enter your password.');
+      return;
+    }
+
     setIsLoggingOn(true);
     setAuthError('');
 
-    const result = await login(email, password);
+    const result = await login(trimmedEmail, password);
 
     if (!result.success) {
       setAuthError(result.error);
@@ -29,17 +45,20 @@ function LoginPage() {
       return;
     }
 
-    // Return the user to the page they originally tried to visit.
     navigate(from, { replace: true });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Log In</h1>
+    <form className="login-form" onSubmit={handleSubmit}>
+      <h1 className="login-title">Log In</h1>
 
-      {authError && <p>{authError}</p>}
+      {authError && (
+        <p className="login-error" role="alert">
+          {authError}
+        </p>
+      )}
 
-      <div>
+      <div className="login-field">
         <label htmlFor="email">Email</label>
         <input
           id="email"
@@ -47,11 +66,14 @@ function LoginPage() {
           type="email"
           required
           value={email}
-          onChange={(event) => setEmail(event.target.value)}
+          onChange={(event) => {
+            setEmail(event.target.value);
+            setAuthError('');
+          }}
         />
       </div>
 
-      <div>
+      <div className="login-field">
         <label htmlFor="password">Password</label>
         <input
           id="password"
@@ -59,7 +81,10 @@ function LoginPage() {
           type="password"
           required
           value={password}
-          onChange={(event) => setPassword(event.target.value)}
+          onChange={(event) => {
+            setPassword(event.target.value);
+            setAuthError('');
+          }}
         />
       </div>
 
