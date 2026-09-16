@@ -43,6 +43,10 @@ The Profile page displays user information and statistics based on the user's to
 
 <img width="1278" height="615" alt="Profile page" src="https://github.com/user-attachments/assets/bd60c0ce-e008-4427-a181-1f41240093ae" />
 
+### Mobile View
+
+![Todo List Mobile](image-2.png)
+
 ## Getting Started
 
 ### Prerequisites
@@ -179,7 +183,8 @@ Possible future improvements include:
 
 ## Live Demo
 
-A live demo is not currently available. The application can be run locally by following the installation instructions above.
+Deployment to Vercel is optional for this assignment. This project is not currently deployed.
+
 
 ## Video Demonstration
 
@@ -187,7 +192,8 @@ A video demonstration is included with the assignment submission to demonstrate 
 
 ## License
 
-This project was created for educational purposes. No additional open-source license has been applied.
+This project is licensed under the MIT License.
+
 
 ## Contact
 
