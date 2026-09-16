@@ -38,15 +38,54 @@ A responsive React todo-list application built with Vite. The app allows authent
 npm install
 ```
 
-## Running the Development Server
+## Live Demo
 
-Start the development server by running:
+A live demo is not currently available.
 
-```bash
-npm run dev
-```
+## Available Scripts
 
-Open your browser and visit the local URL displayed in the terminal (usually `http://localhost:5173`).
+### `npm run dev`
+
+Starts the development server.
+
+### `npm run build`
+
+Creates a production build.
+
+### `npm run preview`
+
+Previews the production build locally.
+
+### `npm run lint`
+
+Runs ESLint to check the codebase.
+
+## Design Decisions
+
+The app uses a warm, earthy color palette to create a cozy and approachable visual identity. This choice was made on purpose to cature the warmth cozy nature of autumn. Reusable React components organize the navigation, todo form, todo list, filtering, sorting, and authentication functionality.
+
+Protected routes prevent unauthenticated users from accessing private pages. React state is used for todo interactions, while URL query parameters support status-based filtering.
+
+The project uses global CSS for shared application styling and a CSS Module for navigation-specific styles. This keeps the overall layout consistent while allowing selected component styles to remain scoped.
+
+## Future Improvements
+
+- Add due dates and reminders
+- Add todo categories or tags
+- Add priority levels
+- Add automated tests
+- Add improved keyboard support for editing
+- Add deployment configuration
+- Add user profile customization
+
+## License
+
+This project was created for educational purposes.
+
+## Contact
+
+- GitHub: https://github.com/ArtfulArtie
+- LinkedIn: https://www.linkedin.com/in/artfulartie/
 
 ## Technologies Used
 
@@ -55,6 +94,3 @@ Open your browser and visit the local URL displayed in the terminal (usually `ht
 * JavaScript
 * CSS
 
-## Author
-
-Arthur Osorio
